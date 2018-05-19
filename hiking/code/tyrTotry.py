@@ -13,5 +13,5 @@ classCount = 10
 
 classCollects = {}
 for key_number in range(0, classCount):
-    classCollects[key_number]=[]
+    classCollects[key_number] = []
     print(classCollects[key_number])

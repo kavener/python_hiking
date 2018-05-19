@@ -3,43 +3,45 @@ from gensim.models import word2vec
 from gensim.models import Word2Vec
 from sklearn.cluster import KMeans
 import rlcompleter
+
+
 def comments_to_comment():
-    sentences=[]
-    data=open("./../data/cut_result_Nostoped.txt").readlines()
+    sentences = []
+    data = open("./../data/cut_result_Nostoped.txt").readlines()
     for str in data:
-        #print(i)
-        sentence=[]
-        y=''
-        tmp=0
+        # print(i)
+        sentence = []
+        y = ''
+        tmp = 0
         for x in str:
-            if(tmp==0):
-                tmp+=1
+            if (tmp == 0):
+                tmp += 1
                 continue
-            if (x!="\n" and x!=" "):
-                y+=x
+            if (x != "\n" and x != " "):
+                y += x
 
-            elif (x==" "):
+            elif (x == " "):
                 sentence.append(y)
-                y=''
+                y = ''
                 continue
 
-        #print("不断构建内层...")
+        # print("不断构建内层...")
         sentences.append(sentence)
-        #print("成功构建一个外层")
+        # print("成功构建一个外层")
     print("txt to sentences success.")
     return sentences
+
+
 def build_word2vec():
-    classCount=10
-    sentences=comments_to_comment()
-    model =word2vec.Word2Vec(sentences, size=200)
+    classCount = 10
+    sentences = comments_to_comment()
+    model = word2vec.Word2Vec(sentences, size=200)
     model.save("./../data/comments.model")
-    keys=model.wv.vocab.keys()
+    keys = model.wv.vocab.keys()
     wordvector = []
     for key in keys:
         wordvector.append(model[key])
     print(keys)
-
-
 
 
 '''
@@ -114,25 +116,19 @@ def wordsCluster():
     '''
 
 
-
-
-
-
-
-#build_word2vec()
-#model_test()
-
-
+# build_word2vec()
+# model_test()
 
 
 def build_word2vec_id():
     while True:
-        if vbs.semaphore==5:
+        if vbs.semaphore == 5:
             print("建立gensim.word2vec模型...")
             build_word2vec()
             break
     print("gensim.word2vec模型建立完成.")
-    vbs.semaphore=6
+    vbs.semaphore = 6
+
 
 def model_test():
     comments_to_comment()
@@ -140,26 +136,25 @@ def model_test():
     model = Word2Vec.load("./../data/comments.model")
     print(model)
     try:
-        y1 = model.similarity(u"好","不好")
+        y1 = model.similarity(u"好", "不好")
     except KeyError:
         y1 = 0
-    print ("【好】和【不好】的相似度为：",y1)
+    print("【好】和【不好】的相似度为：", y1)
 
-
-    y3 = model.most_similar(u"好",topn=20)
-    print ("和【好】最相关的词有：\n")
+    y3 = model.most_similar(u"好", topn=20)
+    print("和【好】最相关的词有：\n")
     for item in y3:
-        print (item[0],item[1])
-    print ("------\n")
+        print(item[0], item[1])
+    print("------\n")
 
-    y3 = model.most_similar(u"不好",topn=20)
-    print ("和【不好】最相关的词有：\n")
+    y3 = model.most_similar(u"不好", topn=20)
+    print("和【不好】最相关的词有：\n")
     for item in y3:
-        print (item[0],item[1])
-    print ("------\n")
+        print(item[0], item[1])
+    print("------\n")
     print(model["好"])
 
-#model_test()
+# model_test()
 
-#result=wordsCluster()
-#print(result)
+# result=wordsCluster()
+# print(result)
