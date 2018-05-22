@@ -35,7 +35,7 @@ def comments_to_comment():
 def build_word2vec():
     classCount = 10
     sentences = comments_to_comment()
-    model = word2vec.Word2Vec(sentences, size=40)
+    model = word2vec.Word2Vec(sentences, size=1000)
     model.save("./../data/comments.model")
     keys = model.wv.vocab.keys()
     wordvector = []
