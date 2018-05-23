@@ -1,1 +1,1 @@
-from ./../code/
+import ./../code/get_comments as s
