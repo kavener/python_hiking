@@ -1,5 +1,8 @@
 from tkinter import *
 
+def input_id_gets():
+    print("f")
+
 root = Tk()
 
 root.title("基于电商评论的用户情感分析的系统")
@@ -13,6 +16,10 @@ root.geometry(
 # 窗口最大值
 root.maxsize(width, height)
 # 窗口最小值
-root.maxsize(width, height)
+root.minsize(width, height)
+
+entry = Entry(root)
+entry.pack(side=LEFT, expand=True, fill=X)
+Button(text='爬取', command=input_id_gets).pack(side=LEFT)
 
 root.mainloop()
