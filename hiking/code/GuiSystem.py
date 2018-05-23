@@ -10,11 +10,14 @@ import delete_stop_word as dsw
 import build_word2vec as bd2
 import create_wordCloud as cwd
 import kmeans as ks
+
+
 def frame(master):
     """将共同的属性作为默认值, 以简化Frame创建过程"""
     w = Frame(master)
     w.pack(side=TOP, expand=YES, fill=BOTH)
     return w
+
 
 def button(master, text, command):
     """提取共同的属性作为默认值, 使Button创建过程简化"""
@@ -22,31 +25,54 @@ def button(master, text, command):
     w.pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2)
     return w
 
+
 def play_result(filename):
     with open(filename) as file:
         contents.delete('1.0', END)
         contents.insert(INSERT, file.read())
+
 
 def get_id_comments():
     fh = open("./variable_id.py", "w")
     fh.write("product_id=" + filename.get())
     fh.close()
     # 清除原评论信息
-    with open("./../data/jd_thread_comments.txt",'w') as file:
+    with open("./../data/jd_thread_comments.txt", 'w') as file:
         file.write('')
     # 爬取评论信息
     gc.get_comments()
 
+
+def load():
+    with open(filename.get()) as file:
+        contents.delete('1.0', END)
+        contents.insert(INSERT, file.read())
+
+
+def save():
+    with open(filename.get(), 'w') as file:
+        file.write(contents.get('1.0', END))
+
+
 def pretreatment():
     ptt.pretreatment()
+
+
 def participle():
     ple.participle()
+
+
 def creat_worldCloud():
     cwd.creat_worldCloud()
+
+
 def build_word2vec():
     bd2.build_word2vec()
+
+
 def kmeans_keys():
     ks.kmeans_keys()
+
 
 root = Tk()
 
@@ -70,24 +96,16 @@ main_menu.add_cascade(label='View', menu=view_menu)
 
 root['menu'] = main_menu  # 将主菜单与root绑定
 
-
 # 窗口大小
 width = 600
 height = 500
 # 窗口居中显示
-root.geometry('%dx%d+%d+%d' % (width, height, (root.winfo_screenwidth() - width) / 2, (root.winfo_screenheight() - height) / 2))
+root.geometry(
+    '%dx%d+%d+%d' % (width, height, (root.winfo_screenwidth() - width) / 2, (root.winfo_screenheight() - height) / 2))
 # 窗口最大值
 # top.maxsize(width, height)
 # 窗口最小值
 root.minsize(width, height)
-
-def load():
-    with open(filename.get()) as file:
-        contents.delete('1.0', END)
-        contents.insert(INSERT, file.read())
-def save():
-    with open(filename.get(), 'w') as file:
-        file.write(contents.get('1.0', END))
 
 frm_input = Frame(root)
 Label(frm_input, text="请输入产品ID").pack(side=LEFT)

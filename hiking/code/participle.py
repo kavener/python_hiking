@@ -14,8 +14,6 @@ from tkinter.ttk import *
 # 添加自己的词典
 def participle():
     print("分词中...")
-    contents.delete('1.0', END)
-    contents.insert(INSERT, file.read())
     jieba.load_userdict('./../useful/myDict.txt')
     # jieba.load_userdict('E:/Learnsoft/Anaconda3/Lib/site-packages/jieba/dict_self.txt')
 
