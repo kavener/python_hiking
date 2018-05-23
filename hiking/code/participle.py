@@ -5,11 +5,17 @@ import jieba
 import variable_id as vbs
 import re
 from jieba import posseg
-
+from tkinter import *
+from tkinter import *
+from tkinter.scrolledtext import ScrolledText
+from tkinter.ttk import *
 
 # 分词
 # 添加自己的词典
 def participle():
+    print("分词中...")
+    contents.delete('1.0', END)
+    contents.insert(INSERT, file.read())
     jieba.load_userdict('./../useful/myDict.txt')
     # jieba.load_userdict('E:/Learnsoft/Anaconda3/Lib/site-packages/jieba/dict_self.txt')
 
@@ -37,7 +43,7 @@ def participle():
         for item in new_tmp:
             fh.write(item + " ")
     fh.close()
-
+    print("分词完成...")
 
 # 词频统计：
 from jieba import analyse

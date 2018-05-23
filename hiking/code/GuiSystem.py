@@ -39,8 +39,14 @@ def get_id_comments():
 
 def pretreatment():
     ptt.pretreatment()
-def input_id_gets():
-    print("f")
+def participle():
+    ple.participle()
+def creat_worldCloud():
+    cwd.creat_worldCloud()
+def build_word2vec():
+    bd2.build_word2vec()
+def kmeans_keys():
+    ks.kmeans_keys()
 
 root = Tk()
 
@@ -92,10 +98,10 @@ frm_input.pack(side=TOP)
 
 frm_function = Frame(root)
 Button(frm_function, text='预处理', command=pretreatment).pack(side=LEFT)
-Button(frm_function, text='分词', command=input_id_gets).pack(side=LEFT)
-Button(frm_function, text='构建词云', command=input_id_gets).pack(side=LEFT)
-Button(frm_function, text='训练词向量', command=input_id_gets).pack(side=LEFT)
-Button(frm_function, text='K-means聚类', command=input_id_gets).pack(side=LEFT)
+Button(frm_function, text='分词', command=participle).pack(side=LEFT)
+Button(frm_function, text='构建词云', command=creat_worldCloud).pack(side=LEFT)
+Button(frm_function, text='训练词向量', command=build_word2vec).pack(side=LEFT)
+Button(frm_function, text='K-means聚类', command=kmeans_keys).pack(side=LEFT)
 frm_function.pack(side=TOP)
 
 frm_edit = Frame(root)
