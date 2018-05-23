@@ -19,7 +19,7 @@ semaphore = 0
 # 添加一个IP池
 all_comments = []
 # 打开待写入文件
-fh = open("./../data/jd_thread_comments.txt", "w")
+
 
 # 暂时用全局变量来代替信号量
 thread_num = 1
@@ -29,7 +29,7 @@ this_page = 1
 in_this_page = 0
 comments_num = 0
 
-
+fh = open("./../data/jd_thread_comments.txt", "a")
 def threadfun():  # 线程任务函数 threadfun()
     global comments_num
     global this_page
@@ -157,5 +157,6 @@ def get_comments():
     tp.start()  # 调用start()，运行线程
     ti.start()  # 调用start()，运行线程
     others.start()
+
 
 # get_comments()
