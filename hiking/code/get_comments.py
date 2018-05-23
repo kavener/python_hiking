@@ -4,6 +4,7 @@ import time
 import use_proxy
 import re
 import variable_id as vbs
+
 # 引入锁机制！！
 from threading import Lock
 
@@ -45,6 +46,7 @@ def threadfun():  # 线程任务函数 threadfun()
             vbs.product_id) + "&score=" + str(i) + "&sortType=5&page=" + str(
             this_page) + "&pageSize=10&isShadowSku=0&rid=0&fold=1"
         print("正在爬取第" + str(in_this_page) + "页评论...")
+        # gs.contents("正在爬取第" + str(in_this_page) + "页评论...")
         data = use_proxy.use_proxy(use_proxy.proxy_addr, url)
         # 正则关键是找到开头的匹配独立字符
         patComments = '"topped".*?"content":"(.*?)","creationTime.*?referenceImage"'

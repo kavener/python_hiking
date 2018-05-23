@@ -13,6 +13,7 @@ from tkinter.ttk import *
 # 分词
 # 添加自己的词典
 def participle():
+    # gs.contents("分词中...")
     print("分词中...")
     jieba.load_userdict('./../useful/myDict.txt')
     # jieba.load_userdict('E:/Learnsoft/Anaconda3/Lib/site-packages/jieba/dict_self.txt')

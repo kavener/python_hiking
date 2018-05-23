@@ -31,6 +31,18 @@ def play_result(filename):
         contents.delete('1.0', END)
         contents.insert(INSERT, file.read())
 
+def contents(info):
+    contents.insert(INSERT, info)
+
+def load():
+    with open(filename.get()) as file:
+        contents.delete('1.0', END)
+        contents.insert(INSERT, file.read())
+
+
+def save():
+    with open(filename.get(), 'w') as file:
+        file.write(contents.get('1.0', END))
 
 def get_id_comments():
     fh = open("./variable_id.py", "w")
@@ -43,28 +55,17 @@ def get_id_comments():
     gc.get_comments()
 
 
-def load():
-    with open(filename.get()) as file:
-        contents.delete('1.0', END)
-        contents.insert(INSERT, file.read())
-
-
-def save():
-    with open(filename.get(), 'w') as file:
-        file.write(contents.get('1.0', END))
-
-
 def pretreatment():
     ptt.pretreatment()
 
 
 def participle():
     ple.participle()
-
+    contents.insert(INSERT, "fds")
 
 def creat_worldCloud():
     cwd.creat_worldCloud()
-
+    contents.insert(INSERT, "fdsgfd")
 
 def build_word2vec():
     bd2.build_word2vec()
