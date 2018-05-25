@@ -1,46 +1,110 @@
 from tkinter import *
+from tkinter.scrolledtext import ScrolledText
+from tkinter.ttk import *
+
+import Apriori as ap
+
+import Kmeans as ks
 
 
-class TYST(Tk):
-    # 对仅仅对属性设置相应参数
-    def __init__(self):
-        Tk.__init__(self)
-        self.scrollbar = Scrollbar(self)
-        self.scrollbar.pack(side=RIGHT, fill=Y)
 
-        self.mylist = Listbox(self, yscrollcommand=self.scrollbar.set)
-
-        for line in range(100):
-            # self.mylist.insert(END,str(line))
-            self.mylist.insert(END, "This is line number " + str(line))
-        self.mylist.pack(side=LEFT, fill=BOTH)
-
-        self.scrollbar.config(command=self.mylist.yview)
+def frame(master):
+    """将共同的属性作为默认值, 以简化Frame创建过程"""
+    w = Frame(master)
+    w.pack(side=TOP, expand=YES, fill=BOTH)
+    return w
 
 
-def main():
-    # 实例化
-    tyst = TYST()
-    for i in range(100):
-        # 调用tkinter中的after、
-        tyst.after(100, tyst.mylist.yview_moveto(i / 100), tyst.update())  # 滚动的同时要不停刷新
-
-    tyst.mainloop()
+def button(master, text, command):
+    """提取共同的属性作为默认值, 使Button创建过程简化"""
+    w = Button(master, text=text, command=command, width=6)
+    w.pack(side=LEFT, expand=YES, fill=BOTH, padx=2, pady=2)
+    return w
 
 
-if __name__ == '__main__':
-    main()
+def play_result(filename):
+    with open(filename) as file:
+        contents.delete('1.0', END)
+        contents.insert(INSERT, file.read())
 
-# from tkinter import *
+def contents(info):
+    contents.insert(INSERT, info)
+
+def load():
+    with open(filename.get()) as file:
+        contents.delete('1.0', END)
+        contents.insert(INSERT, file.read())
+
+
+def save():
+    with open(filename.get(), 'w') as file:
+        file.write(contents.get('1.0', END))
+
+
+def creat_worldCloud():
+    ap.Ap()
+
+def kmeans_keys():
+    ks.kmeans()
+
+
+root = Tk()
+
+root.title("基于电商评论的用户情感分析的系统")
+
+main_menu = Menu()  # 创建最上层主菜单
+# 创建Calculator菜单, 并加入到主菜单
+calc_menu = Menu(main_menu, tearoff=0)
+calc_menu.add_command(label='Quit', command=lambda: exit())
+main_menu.add_cascade(label='File', menu=calc_menu)
+
+# 创建View菜单, 并加入到主菜单
+# 其中"Show Thousands Separator"菜单项是一个Checkbutton
+text = StringVar()
+sep_flag = IntVar()
+sep_flag.set(0)
+view_menu = Menu(main_menu, tearoff=0)
+view_menu.add_checkbutton(label='About', variable=sep_flag,
+                          command=lambda t=text: t.set(add_sep(t.get())))
+main_menu.add_cascade(label='View', menu=view_menu)
+
+root['menu'] = main_menu  # 将主菜单与root绑定
+
+# 窗口大小
+width = 600
+height = 500
+# 窗口居中显示
+root.geometry(
+    '%dx%d+%d+%d' % (width, height, (root.winfo_screenwidth() - width) / 2, (root.winfo_screenheight() - height) / 2))
+# 窗口最大值
+# top.maxsize(width, height)
+# 窗口最小值
+root.minsize(width, height)
 #
-# root = Tk()
-# text = Text(root)
-# text.insert(INSERT, "Hello.....")
-# text.insert(END, "Bye Bye.....")
-# text.pack()
-#
-# text.tag_add("here", "1.0", "1.4")
-# text.tag_add("start", "1.8", "1.13")
-# text.tag_config("here", background = "yellow", foreground = "blue")
-# text.tag_config("start", background = "black", foreground = "green")
-# root.mainloop()
+# frm_input = Frame(root)
+# Label(frm_input, text="请输入产品ID").pack(side=LEFT)
+# filename = Entry(frm_input)
+# filename.pack(side=LEFT, expand=True, fill=X)
+# Button(frm_input, text='爬取', command=get_id_comments).pack(side=LEFT)
+# frm_input.pack(side=TOP)
+
+frm_function = Frame(root)
+
+Button(frm_function, text='训练词向量', command=build_word2vec).pack(side=LEFT)
+Button(frm_function, text='K-means聚类', command=kmeans_keys).pack(side=LEFT)
+frm_function.pack(side=TOP)
+
+frm_edit = Frame(root)
+
+frm_edit_top = Frame(frm_edit)
+contents = ScrolledText(frm_edit_top)
+contents.pack(side=BOTTOM, expand=True, fill=BOTH)
+frm_edit_top.pack(side=TOP)
+
+frm_edit_bottom = Frame(frm_edit)
+Button(frm_edit_bottom, text='Save', command=save).pack(side=BOTTOM)
+frm_edit_bottom.pack(side=BOTTOM)
+
+frm_edit.pack(side=TOP)
+
+mainloop()
