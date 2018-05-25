@@ -60,12 +60,14 @@ def pretreatment():
 
 
 def participle():
+    contents.insert(INSERT, "分词中...\n")
     ple.participle()
-    contents.insert(INSERT, "fds")
+    contents.insert(INSERT, "分词完成...\n")
 
 def creat_worldCloud():
+    contents.insert(INSERT, "构建词云中...\n")
     cwd.creat_worldCloud()
-    contents.insert(INSERT, "fdsgfd")
+    contents.insert(INSERT, "构建词云完成...\n")
 
 def build_word2vec():
     bd2.build_word2vec()
